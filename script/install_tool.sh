@@ -93,29 +93,37 @@ echo "5.安装tf2"
 
 # 读取键盘输入，如果输入1则安装Gazebo仿真,如果输入2则安装vscode,如果输入3则安装ros2,如果直接回车，则安装全部，如果输入q则退出不安装
 read -p "请输入要安装的选项(安装全部:a，退出：q):" choice
-if [  $choice= 1 ]; then
-    gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
-    gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
-elif [ $choice = 2 ]; then
-    gnome-terminal -t "安装vscode" -- bash -c "./install_vscode.sh;exec bash"
-elif [ $choice = 3 ]; then
-    gnome-terminal -t "安装colcon" -- bash -c "./install_colcon.sh;exec bash"
-elif [ $choice = 4 ]; then
-    gnome-terminal -t "安装Gazebo仿真" -- bash -c "./install_Gazebo.sh;exec bash"
-elif [ $choice = 5 ]; then
-    gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
-elif [ $choice = 'a' ]; then
-    gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
-    gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
-    gnome-terminal -t "安装vscode" -- bash -c "./install_vscode.sh;exec bash"
-    gnome-terminal -t "安装colcon" -- bash -c "./install_colcon.sh;exec bash"
-    gnome-terminal -t "安装Gazebo仿真" -- bash -c "./install_Gazebo.sh;exec bash"
-    gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
-elif [ $choice = 'q' ]; then
-    echo "退出安装"
-    exit 0
-else
-    echo "输入错误"
-    #rm ~/install_*.sh
-fi
+case "$choice" in
+    1)
+        gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
+        gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
+        ;;
+    2)
+        gnome-terminal -t "安装vscode" -- bash -c "./install_vscode.sh;exec bash"
+        ;;
+    3)
+        gnome-terminal -t "安装colcon" -- bash -c "./install_colcon.sh;exec bash"
+        ;;
+    4)
+        gnome-terminal -t "安装Gazebo仿真" -- bash -c "./install_Gazebo.sh;exec bash"
+        ;;
+    5)
+        gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
+        ;;
+    a|A)
+        gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
+        gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
+        gnome-terminal -t "安装vscode" -- bash -c "./install_vscode.sh;exec bash"
+        gnome-terminal -t "安装colcon" -- bash -c "./install_colcon.sh;exec bash"
+        gnome-terminal -t "安装Gazebo仿真" -- bash -c "./install_Gazebo.sh;exec bash"
+        gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
+        ;;
+    q|Q)
+        echo "退出安装"
+        exit 0
+        ;;
+    *)
+        echo "输入错误"
+        #rm ~/install_*.sh
+
 rm ~/install_*.sh
