@@ -113,5 +113,6 @@ elif [ $choice = 'a' ]; then
     gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
 else
     echo "输入错误"
+    #rm ~/install_*.sh
 fi
-
+rm ~/install_*.sh
