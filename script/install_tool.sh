@@ -125,5 +125,5 @@ case "$choice" in
     *)
         echo "输入错误"
         #rm ~/install_*.sh
-
+esac
 rm ~/install_*.sh
