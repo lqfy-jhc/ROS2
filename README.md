@@ -1,7 +1,7 @@
 # 脚本列表
 
 ## 一键工具
-[ros2_tool.sh](https://github.com/lqfy-jhc/ROS2/blob/main/script/install_tool.sh)
+[ros2_tool.sh](
 
 ## 一键安装脚本
 
