@@ -85,6 +85,8 @@ rm rm $0
 EOF
 chmod +x install_tf2.sh
 
+
+#---------------------------------------------------------------------#
 function install_tool_clear() {
     if [[ -e "install_tool.sh" ]]; then
         mv ~/install_tool.sh ~/ros2_tool.sh
@@ -92,13 +94,7 @@ function install_tool_clear() {
     echo "正在清除多余安装文件"
     rm ~/install_*.sh
 }
-#---------------------------------------------------------------------#
-echo "可安装列表如下:"
-echo "1.安装ros2"
-echo "2.安装vscode"
-echo "3.安装colcon"
-echo "4.安装Gazebo仿真"
-echo "5.安装tf2"
+
 function install_tool() {
     read -p "是否要安装软件包(是/否：y/n,默认y):" install_choice
     case "$install_choice" in
@@ -120,6 +116,12 @@ function install_tool() {
         ;;
     esac
     # 读取键盘输入，如果输入1则安装Gazebo仿真,如果输入2则安装vscode,如果输入3则安装ros2,如果直接回车，则安装全部，如果输入q则退出不安装
+    echo "可安装列表如下:"
+    echo "1.安装ros2"
+    echo "2.安装vscode"
+    echo "3.安装colcon"
+    echo "4.安装Gazebo仿真"
+    echo "5.安装tf2"
     read -p "请输入要安装的选项(默认安装全部:Enter，退出：q):" choice
     case "$choice" in
     1)
