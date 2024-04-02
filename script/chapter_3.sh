@@ -128,7 +128,7 @@ cat << EOF > subscribe.sh
 cd ~/ros2/mytest_ws && colcon build && source install/setup.bash
 ros2 run subscribe_and_publish subscribe1
 EOF
-chmod +x subscribe.sh && gnome-terminal -t "启动订阅节点" -e bash -c "./subscribe.sh;exec bash"
+chmod +x subscribe.sh && gnome-terminal -t "启动订阅节点" -- bash -c "./subscribe.sh;exec bash"
 
 #再开一个终端，启动发布节点
 cat << EOF > publisher.sh
@@ -136,5 +136,5 @@ cat << EOF > publisher.sh
 cd ~/ros2/mytest_ws && source install/setup.bash
 ros2 run subscribe_and_publish publisher
 EOF
-chmod +x publisher.sh && gnome-terminal -t "启动发布节点" -e bash -c "./publisher.sh;exec bash"
+chmod +x publisher.sh && gnome-terminal -t "启动发布节点" -- bash -c "./publisher.sh;exec bash"
 
