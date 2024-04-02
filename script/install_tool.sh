@@ -119,7 +119,7 @@ function install_tool() {
         ;;
     q | Q)
         echo "退出安装"
-        if [[ -e "~/install_tool.sh" ]];then
+        if [[ -e "install_tool.sh" ]];then
             mv ~/install_tool.sh ~/ros2_install_tool.sh
         fi
         echo "正在删除安装文件"
@@ -128,7 +128,7 @@ function install_tool() {
         ;;
     *)
         echo "输入错误"
-        if [[ -e "~/install_tool.sh" ]];then
+        if [[ -e "install_tool.sh" ]];then
             mv ~/install_tool.sh ~/ros2_install_tool.sh
         fi
         echo "正在删除安装文件"
