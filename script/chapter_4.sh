@@ -9,17 +9,17 @@ ros2 launch turtle_tf2_py turtle_tf2_demo.launch.py && \
 ros2 run turtlesim turtle_teleop_key && \
 rm $0
 EOF
-chmod +x turtle_teleop.sh && gnome-terminal -t "安装tf2" -e bash -c "./turtle_teleop.sh;exec bash"
+chmod +x turtle_teleop.sh && gnome-terminal -t "安装tf2" -- bash -c "./turtle_teleop.sh;exec bash"
 
 #查看TF树
 gnome-terminal -t "查看TF树" -e "bash -c 'ros2 run tf2_tools view_frames; exec bash'"
 # gnome-terminal -- bash -c "ros2 run tf2_tools view_frames;exec bash"
 
 #查询坐标变换信息
-gnome-terminal -t "查询坐标变换信息" -e bash -c "ros2 run tf2_ros tf2_echo turtle2 turtle1;exec bash"
+gnome-terminal -t "查询坐标变换信息" -- bash -c "ros2 run tf2_ros tf2_echo turtle2 turtle1;exec bash"
 
 #坐标系可视化
-gnome-terminal -t "坐标系可视化" -e bash -c "ros2 run rviz2 rviz2 -d $(ros2 pkg prefix --share turtle_tf2_py)/rviz/turtle_rviz.rviz;exec bash"
+gnome-terminal -t "坐标系可视化" -- bash -c "ros2 run rviz2 rviz2 -d $(ros2 pkg prefix --share turtle_tf2_py)/rviz/turtle_rviz.rviz;exec bash"
 
 
 cat <<- EOF > install_Gazebo.sh
