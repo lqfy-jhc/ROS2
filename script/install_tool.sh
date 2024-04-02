@@ -111,6 +111,9 @@ elif [ $choice = 'a' ]; then
     gnome-terminal -t "安装colcon" -- bash -c "./install_colcon.sh;exec bash"
     gnome-terminal -t "安装Gazebo仿真" -- bash -c "./install_Gazebo.sh;exec bash"
     gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
+elif [ $choice = 'q' ]; then
+    echo "退出安装"
+    exit 0
 else
     echo "输入错误"
     #rm ~/install_*.sh
