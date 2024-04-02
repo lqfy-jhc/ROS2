@@ -12,7 +12,7 @@
 curl -sSL https://raw.githubusercontent.com/lqfy-jhc/ROS2/main/script/install_tool.sh | bash
 ```
 
-- 方法 2
+- 方法 2 （x）
 
 ```sh
 curl -L https://github.com/lqfy-jhc/ROS2/blob/main/script/install_tool.sh -o ~/install_tool.sh && chmod +x ~/install_tool.sh && gnome-terminal -t "运行脚本" -- bash -c "./install_tool.sh;exec bash"
