@@ -1,5 +1,4 @@
 #!/bin/bash
-#一键调用脚本 
 ##### #### ### ## #章节1# ### #### #####
 # 安装依赖工具
 echo "安装依赖工具"
@@ -115,9 +114,4 @@ elif [ $choice = 'a' ]; then
 else
     echo "输入错误"
 fi
-
-# 假设要在本地运行在github.com仓库里，假设用户名为a，
-# 仓库为test，里面有个ros2文件夹，里面的run.sh脚本，怎么写一键命令
-curl -L https://github.com/a/test/raw/main/ros2/run.sh -o ~/run.sh && chmod +x ~/run.sh && gnome-terminal -t "运行脚本" -e bash -c "./run.sh;exec bash"
-
 
