@@ -2,8 +2,11 @@
 cd ~
 ##### #### ### ## #章节1# ### #### #####
 # 安装依赖工具
-echo "安装依赖工具"
+cat <<-EOF >install_ros2_before.sh
+# echo "安装依赖工具"
 sudo apt update && sudo apt install curl gnupg lsb-release -y
+EOF
+chmod +x install_ros2_before.sh
 
 # 安装ros2
 cat <<-EOF >install_ros2.sh
@@ -82,6 +85,13 @@ rm rm $0
 EOF
 chmod +x install_tf2.sh
 
+function install_tool_clear() {
+    if [[ -e "install_tool.sh" ]]; then
+        mv ~/install_tool.sh ~/ros2_tool.sh
+    fi
+    echo "正在清除多余安装文件"
+    rm ~/install_*.sh
+}
 #---------------------------------------------------------------------#
 echo "可安装列表如下:"
 echo "1.安装ros2"
@@ -90,8 +100,27 @@ echo "3.安装colcon"
 echo "4.安装Gazebo仿真"
 echo "5.安装tf2"
 function install_tool() {
+    read -p "是否要安装软件包(是/否：y/n,默认y):" install_choice
+    case "$install_choice" in
+    y | Y)
+        gnome-terminal -t "安装依赖工具" -- bash -c "./install_ros2_before.sh;exec bash"
+        ;;
+    n | N)
+        echo "已取消安装"
+        install_tool_clear
+        exit 0
+        ;;
+    "")
+        gnome-terminal -t "安装依赖工具" -- bash -c "./install_ros2_before.sh;exec bash"
+        ;;
+    *)
+        echo "已取消安装"
+        install_tool_clear
+        exit 0
+        ;;
+    esac
     # 读取键盘输入，如果输入1则安装Gazebo仿真,如果输入2则安装vscode,如果输入3则安装ros2,如果直接回车，则安装全部，如果输入q则退出不安装
-    read -p "请输入要安装的选项(安装全部:a，退出：q):" choice
+    read -p "请输入要安装的选项(默认安装全部:Enter，退出：q):" choice
     case "$choice" in
     1)
         gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
@@ -109,7 +138,7 @@ function install_tool() {
     5)
         gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
         ;;
-    a | A)
+    a | A | "")
         gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
         gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
         gnome-terminal -t "安装vscode" -- bash -c "./install_vscode.sh;exec bash"
@@ -119,23 +148,16 @@ function install_tool() {
         ;;
     q | Q)
         echo "退出安装"
-        if [[ -e "install_tool.sh" ]];then
-            mv ~/install_tool.sh ~/ros2_tool.sh
-        fi
-        echo "正在删除安装文件"
-        rm ~/install_*.sh
+        install_tool_clear
         exit 0
         ;;
     *)
         echo "输入错误"
-        if [[ -e "install_tool.sh" ]];then
-            mv ~/install_tool.sh ~/ros2_tool.sh
-        fi
-        echo "正在删除安装文件"
-        rm ~/install_*.sh
+        install_tool_clear
         exit 0
         ;;
     esac
+    install_tool_clear
 }
 
 install_tool
