@@ -17,12 +17,12 @@ source /opt/ros/humble/setup.bash
 echo "source /opt/ros/humble/setup.bash" >>~/.bashrc
 rm $0
 EOF
-chmod +x install_ros2.sh 
+chmod +x install_ros2.sh
 
 # 检验安装是否成功
 # 怎么持续检查文件a.sh是否运行成功，如果运行成功就运行b.sh，如果失败就继续检测，直到检测到b.sh运行成功为止。
 # 这个脚本会持续检测a.txt中是否有特定文本内容abcdef，有就运行a.sh没有就继续检测直到找到并运行a.sh
-cat << EOF > check_ros2.sh
+cat <<EOF >check_ros2.sh
 #!/bin/bash
 while true; do
   if grep -q "source /opt/ros/humble/setup.bash" ~/.bashrc; then
@@ -35,7 +35,7 @@ while true; do
 done
 rm $0
 EOF
-chmod +x check_ros2.sh 
+chmod +x check_ros2.sh
 
 # 安装vscode
 cat <<-EOF >install_vscode.sh
@@ -45,7 +45,7 @@ curl -L https://vscode.download.prss.microsoft.com/dbazure/download/stable/019f4
 sudo dpkg -i ~/vscode.deb && sudo apt update && sudo apt-get install -f
 rm $0
 EOF
-chmod +x install_vscode.sh 
+chmod +x install_vscode.sh
 # err=$(sudo dpkg -i ~/vscode.deb 2>&1)
 # if echo "$err" | grep -q 'Unmet dependencies'; then
 #     sudo apt update && sudo apt-get install -f
@@ -53,14 +53,13 @@ chmod +x install_vscode.sh
 
 ##### #### ### ## #章节2# ### #### #####
 # 安装colcon
-cat <<- EOF > install_colcon.sh
+cat <<-EOF >install_colcon.sh
 #!/bin/bash
 #安装colcon
 sudo apt-get update && sudo apt-get install python3-colcon-common-extensions -y && \
 rm $0
 EOF
 chmod +x install_colcon.sh
-
 
 ##### #### ### ## #章节4# ### #### #####
 # 安装Gazebo仿真
@@ -72,7 +71,7 @@ sudo apt-get update && \
 sudo apt install ros-humble-gazebo-* -y && \
 rm $0
 EOF
-chmod +x install_Gazebo.sh 
+chmod +x install_Gazebo.sh
 
 # 安装tf2相应的功能包
 cat <<-EOF >install_tf2.sh
@@ -82,7 +81,6 @@ rm rm $0
 EOF
 chmod +x install_tf2.sh
 
-
 #---------------------------------------------------------------------#
 echo "可安装列表如下:"
 echo "1.安装ros2"
@@ -90,10 +88,10 @@ echo "2.安装vscode"
 echo "3.安装colcon"
 echo "4.安装Gazebo仿真"
 echo "5.安装tf2"
-
-# 读取键盘输入，如果输入1则安装Gazebo仿真,如果输入2则安装vscode,如果输入3则安装ros2,如果直接回车，则安装全部，如果输入q则退出不安装
-read -p "请输入要安装的选项(安装全部:a，退出：q):" choice
-case "$choice" in
+function install_tool() {
+    # 读取键盘输入，如果输入1则安装Gazebo仿真,如果输入2则安装vscode,如果输入3则安装ros2,如果直接回车，则安装全部，如果输入q则退出不安装
+    read -p "请输入要安装的选项(安装全部:a，退出：q):" choice
+    case "$choice" in
     1)
         gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
         gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
@@ -110,7 +108,7 @@ case "$choice" in
     5)
         gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
         ;;
-    a|A)
+    a | A)
         gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
         gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
         gnome-terminal -t "安装vscode" -- bash -c "./install_vscode.sh;exec bash"
@@ -118,12 +116,16 @@ case "$choice" in
         gnome-terminal -t "安装Gazebo仿真" -- bash -c "./install_Gazebo.sh;exec bash"
         gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
         ;;
-    q|Q)
+    q | Q)
         echo "退出安装"
         exit 0
         ;;
     *)
         echo "输入错误"
         #rm ~/install_*.sh
-esac
-rm ~/install_*.sh
+        ;;
+    esac
+    rm ~/install_*.sh
+}
+
+install_tool
