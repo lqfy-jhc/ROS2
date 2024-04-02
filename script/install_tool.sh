@@ -26,8 +26,8 @@ cat << EOF > check_ros2.sh
 #!/bin/bash
 while true; do
   if grep -q "source /opt/ros/humble/setup.bash" ~/.bashrc; then
-    gnome-terminal -t "检验方法1" -e bash -c "ros2 run turtlesim turtlesim_node && ros2 run turtlesim turtle_teleop_key;exec bash"
-    gnome-terminal -t "检验方法2" -e bash -c "ros2 run demo_nodes_cpp talker && ros2 run demo_nodes_py listener;exec bash"
+    gnome-terminal -t "检验方法1" -- bash -c "ros2 run turtlesim turtlesim_node && ros2 run turtlesim turtle_teleop_key;exec bash"
+    gnome-terminal -t "检验方法2" -- bash -c "ros2 run demo_nodes_cpp talker && ros2 run demo_nodes_py listener;exec bash"
     # bash b.sh
     break
   fi
@@ -94,23 +94,23 @@ echo "5.安装tf2"
 # 读取键盘输入，如果输入1则安装Gazebo仿真,如果输入2则安装vscode,如果输入3则安装ros2,如果直接回车，则安装全部，如果输入q则退出不安装
 read -p "请输入要安装的选项(安装全部:a，退出：q):" choice
 if [  $choice= 1 ]; then
-    gnome-terminal -t "安装ros2" -e bash -c "./install_ros2.sh;exec bash"
-    gnome-terminal -t "检验是否安装成功" -e bash -c "./check_ros2.sh;exec bash"
+    gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
+    gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
 elif [ $choice = 2 ]; then
-    gnome-terminal -t "安装vscode" -e bash -c "./install_vscode.sh;exec bash"
+    gnome-terminal -t "安装vscode" -- bash -c "./install_vscode.sh;exec bash"
 elif [ $choice = 3 ]; then
-    gnome-terminal -t "安装colcon" -e bash -c "./install_colcon.sh;exec bash"
+    gnome-terminal -t "安装colcon" -- bash -c "./install_colcon.sh;exec bash"
 elif [ $choice = 4 ]; then
-    gnome-terminal -t "安装Gazebo仿真" -e bash -c "./install_Gazebo.sh;exec bash"
+    gnome-terminal -t "安装Gazebo仿真" -- bash -c "./install_Gazebo.sh;exec bash"
 elif [ $choice = 5 ]; then
-    gnome-terminal -t "安装tf2" -e bash -c "./install_tf2.sh;exec bash"
+    gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
 elif [ $choice = 'a' ]; then
-    gnome-terminal -t "安装ros2" -e bash -c "./install_ros2.sh;exec bash"
-    gnome-terminal -t "检验是否安装成功" -e bash -c "./check_ros2.sh;exec bash"
-    gnome-terminal -t "安装vscode" -e bash -c "./install_vscode.sh;exec bash"
-    gnome-terminal -t "安装colcon" -e bash -c "./install_colcon.sh;exec bash"
-    gnome-terminal -t "安装Gazebo仿真" -e bash -c "./install_Gazebo.sh;exec bash"
-    gnome-terminal -t "安装tf2" -e bash -c "./install_tf2.sh;exec bash"
+    gnome-terminal -t "安装ros2" -- bash -c "./install_ros2.sh;exec bash"
+    gnome-terminal -t "检验是否安装成功" -- bash -c "./check_ros2.sh;exec bash"
+    gnome-terminal -t "安装vscode" -- bash -c "./install_vscode.sh;exec bash"
+    gnome-terminal -t "安装colcon" -- bash -c "./install_colcon.sh;exec bash"
+    gnome-terminal -t "安装Gazebo仿真" -- bash -c "./install_Gazebo.sh;exec bash"
+    gnome-terminal -t "安装tf2" -- bash -c "./install_tf2.sh;exec bash"
 else
     echo "输入错误"
 fi
