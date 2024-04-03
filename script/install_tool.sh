@@ -89,10 +89,10 @@ chmod +x install_tf2.sh
 #---------------------------------------------------------------------#
 function install_tool_clear() {
     if [[ -e "install_tool.sh" ]]; then
-        mv ~/install_tool.sh ~/ros2_tool.sh
+        mv ~/install_tool.sh ~/install4tool.sh
     fi
     echo "正在清除多余安装文件"
-    rm ~/install_*.sh
+    rm ~/install_*
 }
 
 function install_tool() {
